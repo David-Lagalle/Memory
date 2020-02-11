@@ -1,0 +1,14 @@
+.card {
+  width: 180px;
+  height: 250px;
+  background-color: rgb(238, 238, 238);
+  border-radius: 15%;
+  float: left;
+}
+
+.cards {
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  display: inline-block;
+}
