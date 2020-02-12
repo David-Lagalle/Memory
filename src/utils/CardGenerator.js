@@ -12,6 +12,7 @@ import jack from "../images/cards/jack.png";
 import queen from "../images/cards/queen.png";
 import king from "../images/cards/king.png";
 import joker from "../images/cards/joker.png";
+import { Difficulty } from "./DifficultyEnum";
 
 class Card {
   constructor() {
@@ -39,8 +40,17 @@ var defaultCardValues = [
   { name: "1", scoreValue: 90, image: one }
 ];
 
-export function generateRandomCards() {
-  let cardList = [...defaultCardValues, ...defaultCardValues];
+export function generateRandomCards(difficulty) {
+  var difficultyAdjustedCardValues = defaultCardValues;
+  if (difficulty === Difficulty.Easy) {
+    difficultyAdjustedCardValues = difficultyAdjustedCardValues.slice(0, 5);
+  } else if (difficulty === Difficulty.Normal) {
+    difficultyAdjustedCardValues = difficultyAdjustedCardValues.slice(0, 9);
+  }
+  let cardList = [
+    ...difficultyAdjustedCardValues,
+    ...difficultyAdjustedCardValues
+  ];
   var indexList = [];
   var shuffledCardList = shuffle(cardList);
 

@@ -6,7 +6,7 @@ export default class Card extends React.Component {
   render() {
     return (
       <div>
-        <div className="card">
+        <div id={this.props.card.id} className="card">
           <input
             style={{ border: 0 }}
             type="image"

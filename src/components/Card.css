@@ -12,3 +12,11 @@
   margin-right: auto;
   display: inline-block;
 }
+
+.difficulty {
+  width: 100px;
+  position: absolute;
+  margin-right: 10px;
+  top: 0px;
+  right: 0px;
+}

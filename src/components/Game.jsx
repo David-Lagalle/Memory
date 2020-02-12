@@ -2,6 +2,8 @@ import React from "react";
 import Card from "./Card";
 import { generateRandomCards } from "../utils/CardGenerator";
 import "./Card.css";
+import { Difficulty } from "../utils/DifficultyEnum";
+import { GameStatus } from "../utils/GameStatusEnum";
 
 export default class Game extends React.Component {
   state = {
@@ -9,8 +11,9 @@ export default class Game extends React.Component {
     selected: [],
     score: 0,
     timer: "",
-    actualCardList: generateRandomCards(),
-    gameStatus: "In progress"
+    difficulty: Difficulty.Normal,
+    actualCardList: generateRandomCards(Difficulty.Normal),
+    gameStatus: GameStatus.progress
   };
 
   isCardDisabled = card => {
@@ -31,6 +34,13 @@ export default class Game extends React.Component {
     } else {
       return false;
     }
+  };
+
+  setDifficulty = event => {
+    this.setState({
+      difficulty: event.target.value,
+      actualCardList: generateRandomCards(event.target.value)
+    });
   };
 
   onCardClicked = card => {
@@ -54,9 +64,9 @@ export default class Game extends React.Component {
           score: this.state.score + card.scoreValue
         });
         numberOfFinished = numberOfFinished + 2;
-        if (numberOfFinished === 28) {
+        if (numberOfFinished === this.state.actualCardList.length) {
           this.setState({
-            gameStatus: "You win !"
+            gameStatus: GameStatus.win
           });
         }
       }
@@ -73,6 +83,20 @@ export default class Game extends React.Component {
       <div>
         <h1>The memory game</h1>
         <h3>Score: {this.state.score}</h3>
+        <div className="difficulty">
+          <label htmlFor="difficulty">Difficulty</label>
+          <select
+            className="form-control"
+            name="difficulty"
+            onChange={this.setDifficulty}
+          >
+            <option value={Difficulty.Easy}>{Difficulty.Easy}</option>
+            <option selected value={Difficulty.Normal}>
+              {Difficulty.Normal}
+            </option>
+            <option value={Difficulty.Hard}>{Difficulty.Hard}</option>
+          </select>
+        </div>
         <div className="cards">
           {this.state.actualCardList.map(card => (
             <Card

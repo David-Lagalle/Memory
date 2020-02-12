@@ -1,0 +1,64 @@
+.flip-container {
+  -webkit-perspective: 1000;
+  perspective: 1000;
+  font-size: 30px;
+  margin: 10px;
+  float: left;
+}
+
+.flip-container.vertical:hover .flipper {
+  -webkit-transform: rotateX(180deg);
+  transform: rotateX(180deg);
+}
+.flip-container.horizontal:hover .flipper {
+  -webkit-transform: rotateY(180deg);
+  transform: rotateY(180deg);
+}
+
+.flipper {
+  -webkit-transition: 0.6s;
+  transition: 0.6s;
+  -webkit-transform-style: preserve-3d;
+  transform-style: preserve-3d;
+  position: relative;
+}
+.flip-container.vertical .flipper {
+  -webkit-transform-origin: 50% 100px;
+  transform-origin: 50% 100px;
+}
+
+.front,
+.back {
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.front {
+  z-index: 1;
+  background: #3498db;
+}
+
+.flip-container,
+.front,
+.back {
+  width: 200px;
+  height: 200px;
+  text-align: center;
+  line-height: 200px;
+}
+
+.back {
+  background: #2ecc71;
+}
+
+.flip-container.horizontal .back {
+  -webkit-transform: rotateY(180deg);
+  transform: rotateY(180deg);
+}
+.flip-container.vertical .back {
+  -webkit-transform: rotateX(180deg);
+  transform: rotateX(180deg);
+}
