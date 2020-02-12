@@ -5,11 +5,13 @@ import "./Card.css";
 import EndingPopup from "./EndingPopup";
 import { Difficulty } from "../utils/DifficultyEnum";
 import { GameStatus } from "../utils/GameStatusEnum";
+import { Redirect } from "react-router-dom";
 
 const timerDefaultValue = 120;
 
 export default class Game extends React.Component {
   state = {
+    pseudo: localStorage.getItem("pseudo"),
     finished: [],
     selected: [],
     score: timerDefaultValue,
@@ -103,7 +105,7 @@ export default class Game extends React.Component {
       timer: parseInt(this.state.timer) - 1,
       score: parseInt(this.state.score) - 1
     });
-    if (this.state.duration === 0) {
+    if (this.state.timer === 0) {
       this.clean(GameStatus.loose);
     }
   };
@@ -111,11 +113,21 @@ export default class Game extends React.Component {
   clean = gameStatus => {
     clearInterval(this.state.handleTimer);
     this.setState({ gameStatus: gameStatus });
+
+    var lsScore = JSON.parse(localStorage.getItem("score"));
+
+    if (lsScore === null) {
+      lsScore = [];
+      console.log("here");
+    }
+
+    localStorage.setItem("score", JSON.stringify(this.state.score));
   };
 
   render() {
     return (
       <div>
+        {this.state.pseudo === null ? <Redirect to="/" /> : <></>}
         <h1>The memory game</h1>
         <h3>Score: {this.state.score}</h3>
         <div className="difficulty">
