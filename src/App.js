@@ -15,13 +15,13 @@ function App() {
     <div className="box">
       <div className="card-header">
         <Link className="btn btn-primary" to="/">
-          <Icon style={{ width: 40 }} path={mdiHome} />
+          <Icon color="white" style={{ width: 40 }} path={mdiHome} />
         </Link>
         <Link className="btn btn-primary" to="/game">
-          <Icon style={{ width: 40 }} path={mdiCards} />
+          <Icon color="white" style={{ width: 40 }} path={mdiCards} />
         </Link>
         <Link className="btn btn-primary" to="/score">
-          <Icon style={{ width: 40 }} path={mdiPodium} />
+          <Icon color="white" style={{ width: 40 }} path={mdiPodium} />
         </Link>
       </div>
       <Route exact path="/" component={() => <Home />} />
